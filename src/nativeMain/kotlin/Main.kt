@@ -1,25 +1,16 @@
-import java.util.Stack
-
 fun isValid(s: String): Boolean {
+    val list = mutableListOf<Char>()
     if (s.length % 2 != 0 || s.isEmpty()) return false
-    else
-    {
-        val h: MutableMap<Char, Char> = HashMap()
-        h[')'] = '('
-        h[']'] = '['
-        h['}'] = '{'
-
-        val stack = Stack<Char>
+    else {
         for (c in s) {
-            '(' -> stack.push(c)
-            ')' -> if (stack.isEmpty) {
-                return false
-            } else {
-                stack.pop()
+            if (c == '(' || c == '[' || c == '{') list.add(c)
+            else {
+                if (list.isEmpty()) return false
+                list.removeLast()
             }
         }
     }
-    return stack.isEmpty()
+    return list.isEmpty()
 }
 
 fun main() {
